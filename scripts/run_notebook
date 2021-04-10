@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+set -e
+
+cd ../docker
+# Remove containers if already running
+ docker-compose rm -fsv build-notebook run-notebook
+# Build and spin (stop if error in building)
+docker-compose up --build --remove-orphans --abort-on-container-exit build-notebook
+docker-compose up --build --remove-orphans run-notebook

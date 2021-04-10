@@ -1,0 +1,59 @@
+version: "2.3"
+
+services:
+  # Build base image
+  build-notebook:
+    image: jupyter/notebook:builder
+    build:
+      context: $PROJECTDIR
+      dockerfile: docker/Dockerfile # (wrt the PROJECTDIR)
+      target: builder
+    # Either of these will work. Empty command will launch a notebook
+    command: python3 -m unittest
+    # command: echo "built" #
+
+  # Run jupyter notebook (for editing)
+  run-notebook:
+    image: jupyter/notebook:run
+    build:
+      context: $PROJECTDIR
+      dockerfile: docker/Dockerfile
+      target: run
+      cache_from:
+        - jupyter/notebook:builder
+    volumes:
+      - $PROJECTDIR:/home/jovyan/work/
+    ports:
+      - "8888:8888"
+    depends_on:
+      - build-notebook
+
+  # Run voila server
+  voila:
+    image: jupyter/voila
+    build:
+      context: $PROJECTDIR
+      dockerfile: docker/Dockerfile
+      target: deploy
+      cache_from:
+        - jupyter/notebook:builder
+    volumes:
+      - $PROJECTDIR:/home/jovyan/work/
+    expose:
+      - 8866
+    command: ./run_voila
+
+  # Run nginx and connect to voila container
+  nginx:
+    image: nginx-voila
+    build:
+      context: $JSVDIR
+      dockerfile: docker/Dockerfile.nginx
+    restart: unless-stopped
+    container_name: nginx
+    links:
+      - voila # required for the nginx configuration
+    ports:
+      - 80:80
+    volumes:
+      - $JSVDIR/nginx/conf.d/:/etc/nginx/conf.d/
