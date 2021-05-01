@@ -41,7 +41,8 @@ services:
       - $PROJECTDIR:/home/jovyan/work/
     expose:
       - 8866
-    command: ./run_voila
+    command: sh ./run_voila
+    #or command: ./run_voila
 
   # Run nginx and connect to voila container
   nginx:

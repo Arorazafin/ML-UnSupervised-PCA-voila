@@ -21,6 +21,10 @@ USER $NB_USER
 
 # Install necessary jupyter packages for writing here. e.g.
 RUN jupyter nbextension enable --py --sys-prefix widgetsnbextension
+# voila gridstack : link the local files
+RUN jupyter nbextension install --sys-prefix --symlink --overwrite --py voila-gridstack
+# voila gridstack : enable the extension
+RUN jupyter nbextension enable --sys-prefix --py voila-gridstack
 
 ####################
 # Deployment Stage #

@@ -2,12 +2,3 @@
 
 python3 -m voila pca-voila.ipynb --template=gridstack
 
-#python3 -m voila \
-	# --enable_nbextensions=True \
-	# --autoreload=True \
-	# --no-browser \
-	# --MappingKernelManager.cull_interval=60 \
-	# --MappingKernelManager.cull_idle_timeout=120
-	# --VoilaConfiguration.resources='{“gridstack”: {“show_handles”: True}}'
-	#--template=gridstack
-#	--theme=dark
