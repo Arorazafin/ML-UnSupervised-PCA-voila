@@ -1,6 +1,6 @@
 
 - Prerequisite : Docker 
-- Kagge Data : [Clustering the Countries by using Unsupervised Learning for HELP International](https://www.kaggle.com/rohan0301/unsupervised-learning-on-country-data)
+- Kaggle Data : [Clustering the Countries by using Unsupervised Learning for HELP International](https://www.kaggle.com/rohan0301/unsupervised-learning-on-country-data)
 - PCA vizualization with voila
 - Using voila gridstack template
 - voila under Docker 
