@@ -13,6 +13,6 @@
     `./deploy_notebook`  
     run : http://localhost:80/  
 
-![](/img/pca.PNG)
+![](/img/pca.png)
 
 
